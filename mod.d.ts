@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2023 The Stdlib Authors.
@@ -16,17 +16,35 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
+
+import { Array4D } from '@stdlib/types/array';
+import { Shape4D } from '@stdlib/types/ndarray';
 
 /**
-* Apply a unary callback to elements in a four-dimensional nested input array and assign results to elements in a four-dimensional nested output array.
+* Unary callback.
 *
-* @module @stdlib/array-base-unary4d
+* @param value - array element
+* @returns result
+*/
+type Unary<T, U> = ( value: T ) => U;
+
+/**
+* Applies a unary callback to elements in a four-dimensional nested input array and assigns results to elements in a four-dimensional nested output array.
+*
+* ## Notes
+*
+* -   The function assumes that the input and output arrays have the same shape.
+*
+* @param arrays - array containing one input nested array and one output nested array
+* @param shape - array shape
+* @param fcn - unary callback
 *
 * @example
 * var ones4d = require( '@stdlib/array-base-ones4d' );
 * var zeros4d = require( '@stdlib/array-base-zeros4d' );
-* var unary4d = require( '@stdlib/array-base-unary4d' );
 *
 * function scale( x ) {
 *     return x * 10.0;
@@ -42,12 +60,9 @@
 * console.log( y );
 * // => [ [ [ [ 10.0, 10.0 ], [ 10.0, 10.0 ] ] ] ]
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function unary4d<T = unknown, U = unknown>( arrays: [ Array4D<T>, Array4D<U> ], shape: Shape4D, fcn: Unary<T, U> ): void;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = unary4d;
